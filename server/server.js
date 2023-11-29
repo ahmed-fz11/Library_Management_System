@@ -11,6 +11,9 @@ app.use(express.json())
 
 app.use(cors())
 
+//Import Routes
+
+
 mongoose.connect(process.env.MONG_URI)
 .then(()=>{
     app.listen(process.env.PORT, ()=>{
@@ -20,7 +23,7 @@ mongoose.connect(process.env.MONG_URI)
 .catch((error)=>{
     console.log(error)
 })
-
+console.log("rehbgj")
 //Make your API calls for every usecase here
 
   
