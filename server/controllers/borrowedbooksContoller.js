@@ -67,3 +67,17 @@ export const deleteBorrowedBook = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Get borrowed books by status
+export const getBorrowedBooksByStatus = async (req, res) => {
+    try {
+        const status = req.params.status; // 'issued', 'overdue', 'returned'
+        const borrowedBooks = await BorrowedBook.find({ status: status })
+            .populate('student')
+            .populate('book')
+            .populate('staff');
+        res.status(200).json(borrowedBooks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};

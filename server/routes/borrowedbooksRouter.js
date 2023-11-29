@@ -7,7 +7,8 @@ const {
     getAllBorrowedBooks, 
     getOneBorrowedBook, 
     updateBorrowedBook, 
-    deleteBorrowedBook 
+    deleteBorrowedBook,
+    getBorrowedBooksByStatus 
 } = require('../controllers/borrowedBooksController');
 
 // Routes
@@ -16,5 +17,6 @@ router.get('/', getAllBorrowedBooks);
 router.get('/:id', getOneBorrowedBook);
 router.put('/:id', updateBorrowedBook);
 router.delete('/:id', deleteBorrowedBook);
+router.get('/status/:status', getBorrowedBooksByStatus);
 
 module.exports = router;
