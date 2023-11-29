@@ -26,7 +26,8 @@ export const getAllManagers = async (req, res) => {
 // Get one manager
 export const getOneManager = async (req, res) => {
     try {
-        const manager = await Manager.findById(req.params.id);
+        const managerId = req.body.id;
+        const manager = await Manager.findById(managerId);
         if (!manager) {
             return res.status(404).json({ error: 'Manager not found' });
         }
@@ -39,7 +40,8 @@ export const getOneManager = async (req, res) => {
 // Update a manager
 export const updateManager = async (req, res) => {
     try {
-        const manager = await Manager.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const managerId = req.body.id;
+        const manager = await Manager.findByIdAndUpdate(managerId, req.body, { new: true });
         if (!manager) {
             return res.status(404).json({ error: 'Manager not found' });
         }
@@ -52,7 +54,8 @@ export const updateManager = async (req, res) => {
 // Delete a manager
 export const deleteManager = async (req, res) => {
     try {
-        const manager = await Manager.findByIdAndDelete(req.params.id);
+        const managerId = req.body.id;
+        const manager = await Manager.findByIdAndDelete(managerId);
         if (!manager) {
             return res.status(404).json({ error: 'Manager not found' });
         }
