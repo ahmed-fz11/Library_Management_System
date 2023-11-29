@@ -68,12 +68,12 @@ export const deleteManager = async (req, res) => {
 // Manager Signup
 export const managerSignup = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const existingManager = await Manager.findOne({ username });
+        const { email, password } = req.body;
+        const existingManager = await Manager.findOne({ email });
         if (existingManager) {
-            return res.status(400).json({ error: 'Username already exists' });
+            return res.status(400).json({ error: 'email already exists' });
         }
-        const newManager = await Manager.create({ username, password });
+        const newManager = await Manager.create({ email, password });
         res.status(201).json(newManager);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -83,13 +83,13 @@ export const managerSignup = async (req, res) => {
 // Manager Login
 export const managerLogin = async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const manager = await Manager.findOne({ username });
+        const { email, password } = req.body;
+        const manager = await Manager.findOne({ email });
         if (!manager) {
-            return res.status(401).json({ error: 'Invalid username or password' });
+            return res.status(401).json({ error: 'Invalid email or password' });
         }
         if (manager.password !== password) {
-            return res.status(401).json({ error: 'Invalid username or password' });
+            return res.status(401).json({ error: 'Invalid email or password' });
         }
         res.status(200).json(manager);
     } catch (error) {
