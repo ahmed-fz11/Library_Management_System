@@ -29,7 +29,8 @@ export const getAllBorrowedBooks = async (req, res) => {
 // Get one borrowed book
 export const getOneBorrowedBook = async (req, res) => {
     try {
-        const borrowedBook = await BorrowedBook.findById(req.params.id)
+        const borrowedBookId = req.body.id;
+        const borrowedBook = await BorrowedBook.findById(borrowedBookId)
             .populate('student')
             .populate('book')
             .populate('staff');
@@ -45,7 +46,8 @@ export const getOneBorrowedBook = async (req, res) => {
 // Update a borrowed book record
 export const updateBorrowedBook = async (req, res) => {
     try {
-        const borrowedBook = await BorrowedBook.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const borrowedBookId = req.body.id;
+        const borrowedBook = await BorrowedBook.findByIdAndUpdate(borrowedBookId, req.body, { new: true });
         if (!borrowedBook) {
             return res.status(404).json({ error: 'Borrowed book not found' });
         }
@@ -58,7 +60,8 @@ export const updateBorrowedBook = async (req, res) => {
 // Delete a borrowed book record
 export const deleteBorrowedBook = async (req, res) => {
     try {
-        const borrowedBook = await BorrowedBook.findByIdAndDelete(req.params.id);
+        const borrowedBookId = req.body.id;
+        const borrowedBook = await BorrowedBook.findByIdAndDelete(borrowedBookId);
         if (!borrowedBook) {
             return res.status(404).json({ error: 'Borrowed book not found' });
         }
@@ -71,7 +74,7 @@ export const deleteBorrowedBook = async (req, res) => {
 // Get borrowed books by status
 export const getBorrowedBooksByStatus = async (req, res) => {
     try {
-        const status = req.params.status; // 'issued', 'overdue', 'returned'
+        const status = req.body.status;
         const borrowedBooks = await BorrowedBook.find({ status: status })
             .populate('student')
             .populate('book')

@@ -1,23 +1,21 @@
 import express from 'express';
 const router = express.Router();
 
-// Controllers
-import { 
-    borrowBook, 
-    getAllBorrowedBooks, 
-    getOneBorrowedBook, 
-    updateBorrowedBook, 
+import {
+    borrowBook,
+    getAllBorrowedBooks,
+    getOneBorrowedBook,
+    updateBorrowedBook,
     deleteBorrowedBook,
-    getBorrowedBooksByStatus 
+    getBorrowedBooksByStatus
 } from '../controllers/borrowedbooksController.js';
 
 // Routes
 router.post('/borrow', borrowBook);
-router.get('/', getAllBorrowedBooks);
-router.get('/:id', getOneBorrowedBook);
-router.put('/:id', updateBorrowedBook);
-router.delete('/:id', deleteBorrowedBook);
-router.get('/status/:status', getBorrowedBooksByStatus);
+router.post('/all', getAllBorrowedBooks); 
+router.post('/get', getOneBorrowedBook); 
+router.post('/update', updateBorrowedBook); 
+router.post('/delete', deleteBorrowedBook); 
+router.post('/status', getBorrowedBooksByStatus);
 
 export default router;
-
