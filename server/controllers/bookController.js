@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 // Mongoose Model
-const Book = require('../models/book.js');
+const Book = require('../models/book');
 
 // Add a new book
 export const addBook = async (req, res) => {
