@@ -26,7 +26,8 @@ export const getAllFeedbacks = async (req, res) => {
 // Get one feedback
 export const getOneFeedback = async (req, res) => {
     try {
-        const feedback = await Feedback.findById(req.params.id).populate('student');
+        const feedbackId = req.body.id;
+        const feedback = await Feedback.findById(feedbackId).populate('student');
         if (!feedback) {
             return res.status(404).json({ error: 'Feedback not found' });
         }
@@ -39,7 +40,8 @@ export const getOneFeedback = async (req, res) => {
 // Update a feedback
 export const updateFeedback = async (req, res) => {
     try {
-        const feedback = await Feedback.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const feedbackId = req.body.id;
+        const feedback = await Feedback.findByIdAndUpdate(feedbackId, req.body, { new: true });
         if (!feedback) {
             return res.status(404).json({ error: 'Feedback not found' });
         }
@@ -52,7 +54,8 @@ export const updateFeedback = async (req, res) => {
 // Delete a feedback
 export const deleteFeedback = async (req, res) => {
     try {
-        const feedback = await Feedback.findByIdAndDelete(req.params.id);
+        const feedbackId = req.body.id;
+        const feedback = await Feedback.findByIdAndDelete(feedbackId);
         if (!feedback) {
             return res.status(404).json({ error: 'Feedback not found' });
         }
@@ -65,7 +68,7 @@ export const deleteFeedback = async (req, res) => {
 // Get feedback by category
 export const getFeedbackByCategory = async (req, res) => {
     try {
-        const category = req.params.category; // 'Availability of books', 'Diversity of collections', 'Cleanliness of library'
+        const category = req.body.category;
         const feedbacks = await Feedback.find({ aspect: category }).populate('student');
         res.status(200).json(feedbacks);
     } catch (error) {

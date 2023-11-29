@@ -68,7 +68,7 @@ export const deleteBook = async (req, res) => {
 // Search for a book by title
 export const searchBookByTitle = async (req, res) => {
     try {
-        const query = req.body.title;
+        const query = req.body.name;
         const books = await Book.find({ name: new RegExp(query, 'i') });
         res.status(200).json(books);
     } catch (error) {
