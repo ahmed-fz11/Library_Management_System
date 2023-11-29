@@ -64,3 +64,37 @@ export const deleteStaff = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Staff Signup
+export const staffSignup = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const existingStaff = await Staff.findOne({ username });
+        if (existingStaff) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+        const newStaff = await Staff.create({ username, password });
+        res.status(201).json(newStaff);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Staff Login
+export const staffLogin = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const staff = await Staff.findOne({ username });
+        if (!staff) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        if (staff.password !== password) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        // Create and sign a JWT token
+        const token = jwt.sign({ id: staff._id }, 'your-secret-key', { expiresIn: '1h' });
+        res.status(200).json({ token, staff });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
