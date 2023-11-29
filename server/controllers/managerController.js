@@ -64,3 +64,35 @@ export const deleteManager = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Manager Signup
+export const managerSignup = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const existingManager = await Manager.findOne({ username });
+        if (existingManager) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+        const newManager = await Manager.create({ username, password });
+        res.status(201).json(newManager);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Manager Login
+export const managerLogin = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const manager = await Manager.findOne({ username });
+        if (!manager) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        if (manager.password !== password) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        res.status(200).json(manager);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
