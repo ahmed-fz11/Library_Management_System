@@ -64,3 +64,37 @@ export const deleteStudent = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Student Signup
+export const studentSignup = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const existingStudent = await Student.findOne({ username });
+        if (existingStudent) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+        const newStudent = await Student.create({ username, password });
+        res.status(201).json(newStudent);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Student Login
+export const studentLogin = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const student = await Student.findOne({ username });
+        if (!student) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        if (student.password !== password) {
+            return res.status(401).json({ error: 'Invalid username or password' });
+        }
+        // Create and sign a JWT token
+        const token = jwt.sign({ id: student._id }, 'your-secret-key', { expiresIn: '1h' });
+        res.status(200).json({ token, student });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
