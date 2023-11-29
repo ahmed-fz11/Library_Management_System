@@ -61,3 +61,14 @@ export const deleteBook = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Search for a book by title
+export const searchBookByTitle = async (req, res) => {
+    try {
+        const query = req.query.title;
+        const books = await Book.find({ name: new RegExp(query, 'i') });
+        res.status(200).json(books);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
