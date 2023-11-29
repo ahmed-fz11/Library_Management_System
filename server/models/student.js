@@ -7,13 +7,12 @@ const studentSchema = new mongoose.Schema({
     email: {
         type: String,
         required: true,
-        unique: true, // Email should be unique for each student
-        match: [/.+\@.+\..+/, 'Please fill a valid email address'] // Simple regex for email validation
+        unique: true, 
+        match: [/.+\@.+\..+/, 'Please fill a valid email address'] 
     },
     password: {
         type: String,
         required: true
-        // You can add additional properties like minlength if needed
     }
 });
 

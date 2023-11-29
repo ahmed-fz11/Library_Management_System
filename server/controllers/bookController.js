@@ -26,7 +26,8 @@ export const getAllBooks = async (req, res) => {
 // Get one book
 export const getOneBook = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
+        const bookId = req.body.id;
+        const book = await Book.findById(bookId);
         if (!book) {
             return res.status(404).json({ error: 'Book not found' });
         }
@@ -39,7 +40,8 @@ export const getOneBook = async (req, res) => {
 // Update a book
 export const updateBook = async (req, res) => {
     try {
-        const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const bookId = req.body.id;
+        const book = await Book.findByIdAndUpdate(bookId, req.body, { new: true });
         if (!book) {
             return res.status(404).json({ error: 'Book not found' });
         }
@@ -52,7 +54,8 @@ export const updateBook = async (req, res) => {
 // Delete a book
 export const deleteBook = async (req, res) => {
     try {
-        const book = await Book.findByIdAndDelete(req.params.id);
+        const bookId = req.body.id;
+        const book = await Book.findByIdAndDelete(bookId);
         if (!book) {
             return res.status(404).json({ error: 'Book not found' });
         }
@@ -65,7 +68,7 @@ export const deleteBook = async (req, res) => {
 // Search for a book by title
 export const searchBookByTitle = async (req, res) => {
     try {
-        const query = req.query.title;
+        const query = req.body.title;
         const books = await Book.find({ name: new RegExp(query, 'i') });
         res.status(200).json(books);
     } catch (error) {
