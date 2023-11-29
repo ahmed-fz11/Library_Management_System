@@ -7,7 +7,8 @@ const {
     getAllFeedbacks, 
     getOneFeedback, 
     updateFeedback, 
-    deleteFeedback 
+    deleteFeedback,
+    getFeedbackByCategory
 } = require('../controllers/feedbackController');
 
 // Routes
@@ -16,5 +17,6 @@ router.get('/', getAllFeedbacks);
 router.get('/:id', getOneFeedback);
 router.put('/:id', updateFeedback);
 router.delete('/:id', deleteFeedback);
+router.get('/category/:category', getFeedbackByCategory);
 
 module.exports = router;

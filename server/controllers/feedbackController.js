@@ -61,3 +61,14 @@ export const deleteFeedback = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
+// Get feedback by category
+export const getFeedbackByCategory = async (req, res) => {
+    try {
+        const category = req.params.category; // 'Availability of books', 'Diversity of collections', 'Cleanliness of library'
+        const feedbacks = await Feedback.find({ aspect: category }).populate('student');
+        res.status(200).json(feedbacks);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
