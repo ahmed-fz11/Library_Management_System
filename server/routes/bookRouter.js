@@ -23,7 +23,7 @@ router.post('/get', getOneBook);
 router.post('/update', updateBook);
 
 // Delete a specific book 
-router.post('/delete', deleteBook);
+router.delete('/delete', deleteBook);
 
 // Search for a book by title 
 router.post('/search', searchBookByTitle);

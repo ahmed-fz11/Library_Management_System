@@ -15,7 +15,7 @@ router.post('/borrow', borrowBook);
 router.post('/all', getAllBorrowedBooks); 
 router.post('/get', getOneBorrowedBook); 
 router.post('/update', updateBorrowedBook); 
-router.post('/delete', deleteBorrowedBook); 
+router.delete('/delete', deleteBorrowedBook); 
 router.post('/status', getBorrowedBooksByStatus);
 
 export default router;

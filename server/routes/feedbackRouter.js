@@ -15,7 +15,7 @@ router.post('/submit', submitFeedback);
 router.post('/all', getAllFeedbacks); 
 router.post('/get', getOneFeedback); 
 router.post('/update', updateFeedback); 
-router.post('/delete', deleteFeedback); 
+router.delete('/delete', deleteFeedback); 
 router.post('/category', getFeedbackByCategory);
 
 export default router;

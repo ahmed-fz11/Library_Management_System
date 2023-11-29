@@ -14,6 +14,6 @@ router.post('/add', addManager);
 router.post('/all', getAllManagers); 
 router.post('/get', getOneManager); 
 router.post('/update', updateManager);
-router.post('/delete', deleteManager); 
+router.delete('/delete', deleteManager); 
 
 export default router;

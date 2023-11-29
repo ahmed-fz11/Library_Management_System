@@ -14,6 +14,6 @@ router.post('/add', addStaff);
 router.post('/all', getAllStaff);
 router.post('/get', getOneStaff);
 router.post('/update', updateStaff);
-router.post('/delete', deleteStaff);
+router.delete('/delete', deleteStaff);
 
 export default router;

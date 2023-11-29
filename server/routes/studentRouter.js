@@ -14,6 +14,6 @@ router.post('/add', addStudent);
 router.post('/all', getAllStudents); 
 router.post('/get', getOneStudent); 
 router.post('/update', updateStudent); 
-router.post('/delete', deleteStudent); 
+router.delete('/delete', deleteStudent); 
 
 export default router;
