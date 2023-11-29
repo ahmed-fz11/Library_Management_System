@@ -26,7 +26,8 @@ export const getAllStaff = async (req, res) => {
 // Get one staff member
 export const getOneStaff = async (req, res) => {
     try {
-        const staff = await Staff.findById(req.params.id);
+        const staffId = req.body.id;
+        const staff = await Staff.findById(staffId);
         if (!staff) {
             return res.status(404).json({ error: 'Staff member not found' });
         }
@@ -39,7 +40,8 @@ export const getOneStaff = async (req, res) => {
 // Update a staff member
 export const updateStaff = async (req, res) => {
     try {
-        const staff = await Staff.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const staffId = req.body.id;
+        const staff = await Staff.findByIdAndUpdate(staffId, req.body, { new: true });
         if (!staff) {
             return res.status(404).json({ error: 'Staff member not found' });
         }
@@ -52,7 +54,8 @@ export const updateStaff = async (req, res) => {
 // Delete a staff member
 export const deleteStaff = async (req, res) => {
     try {
-        const staff = await Staff.findByIdAndDelete(req.params.id);
+        const staffId = req.body.id;
+        const staff = await Staff.findByIdAndDelete(staffId);
         if (!staff) {
             return res.status(404).json({ error: 'Staff member not found' });
         }
