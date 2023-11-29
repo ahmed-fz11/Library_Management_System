@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-
+// import { Request, Response } from 'express';
+import express from 'express';
 // Mongoose Model
-const Feedback = require('../models/feedback');
+import Feedback from '../models/feedback.js';
 
 // Submit feedback
 export const submitFeedback = async (req, res) => {

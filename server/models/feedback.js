@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const feedbackSchema = new mongoose.Schema({
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
@@ -7,3 +7,5 @@ const feedbackSchema = new mongoose.Schema({
 });
 
 const Feedback = mongoose.model('Feedback', feedbackSchema);
+
+export default Feedback;

@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-
+// import { Request, Response } from 'express';
+import express from 'express';
 // Mongoose Model
-const BorrowedBook = require('../models/borrowedbooks');
+import BorrowedBook from '../models/borrowedbooks.js';
 
 // Borrow a book
 export const borrowBook = async (req, res) => {

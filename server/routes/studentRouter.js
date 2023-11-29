@@ -2,13 +2,14 @@ import express from 'express';
 const router = express.Router();
 
 // Controllers
-const { 
+import { 
     addStudent, 
     getAllStudents, 
     getOneStudent, 
     updateStudent, 
     deleteStudent 
-} = require('../controllers/studentController');
+} from '../controllers/studentController.js';
+
 
 // Routes
 router.post('/add', addStudent);
@@ -17,4 +18,5 @@ router.get('/:id', getOneStudent);
 router.put('/:id', updateStudent);
 router.delete('/:id', deleteStudent);
 
-module.exports = router;
+export default router;
+

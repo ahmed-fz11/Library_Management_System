@@ -3,12 +3,13 @@ import dotenv from 'dotenv';
 import mongoose from 'mongoose';
 import cors from 'cors'
 // Importing Routes 
-const bookRouter = require('./routes/bookRoute');
-const borrowedbooksRouter = require('./routes/borrowedbooksRoute');
-const feedbackRouter = require('./routes/feedBackRoute');   
-const managerRouter = require('./routes/managerRoute');
-const staffRouter = require('./routes/staffRoute');
-const studentRouter = require('./routes/studentRoute');
+import bookRouter from './routes/bookRouter.js';
+import borrowedbooksRouter from './routes/borrowedbooksRouter.js';
+import feedbackRouter from './routes/feedbackRouter.js';
+import managerRouter from './routes/managerRouter.js';
+import staffRouter from './routes/staffRouter.js';
+import studentRouter from './routes/studentRouter.js';
+
 
 dotenv.config();
 

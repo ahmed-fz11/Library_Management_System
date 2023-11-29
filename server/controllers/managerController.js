@@ -1,7 +1,7 @@
-import { Request, Response } from 'express';
-
+// import { Request, Response } from 'express';
+import express from 'express';
 // Mongoose Model
-const Manager = require('../models/manager');
+import Manager from '../models/manager.js';
 
 // Add a new manager
 export const addManager = async (req, res) => {

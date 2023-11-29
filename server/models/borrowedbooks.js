@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const borrowedBooksSchema = new mongoose.Schema({
     student: { type: mongoose.Schema.Types.ObjectId, ref: 'Student', required: true },
@@ -10,3 +10,5 @@ const borrowedBooksSchema = new mongoose.Schema({
 });
 
 const BorrowedBook = mongoose.model('BorrowedBook', borrowedBooksSchema);
+
+export default BorrowedBook;

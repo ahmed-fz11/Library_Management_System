@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 // Controllers
-const { addBook, getAllBooks, getOneBook, updateBook, deleteBook, searchBookByTitle } = require('../controllers/bookController');
+import { addBook, getAllBooks, getOneBook, updateBook, deleteBook, searchBookByTitle } from '../controllers/bookController.js';
 
 // Add a new book
 router.post('/add', addBook);
@@ -22,4 +22,5 @@ router.delete('/:id', deleteBook);
 // Search for a book by title
 router.get('/search', searchBookByTitle);
 
-module.exports = router;
+export default router;
+

@@ -2,13 +2,14 @@ import express from 'express';
 const router = express.Router();
 
 // Controllers
-const { 
+import { 
     addStaff, 
     getAllStaff, 
     getOneStaff, 
     updateStaff, 
     deleteStaff 
-} = require('../controllers/staffController');
+} from '../controllers/staffController.js';
+
 
 // Routes
 router.post('/add', addStaff);
@@ -17,4 +18,5 @@ router.get('/:id', getOneStaff);
 router.put('/:id', updateStaff);
 router.delete('/:id', deleteStaff);
 
-module.exports = router;
+export default router;
+

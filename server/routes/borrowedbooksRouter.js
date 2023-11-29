@@ -2,14 +2,14 @@ import express from 'express';
 const router = express.Router();
 
 // Controllers
-const { 
+import { 
     borrowBook, 
     getAllBorrowedBooks, 
     getOneBorrowedBook, 
     updateBorrowedBook, 
     deleteBorrowedBook,
     getBorrowedBooksByStatus 
-} = require('../controllers/borrowedBooksController');
+} from '../controllers/borrowedbooksController.js';
 
 // Routes
 router.post('/borrow', borrowBook);
@@ -19,4 +19,5 @@ router.put('/:id', updateBorrowedBook);
 router.delete('/:id', deleteBorrowedBook);
 router.get('/status/:status', getBorrowedBooksByStatus);
 
-module.exports = router;
+export default router;
+

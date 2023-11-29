@@ -2,14 +2,15 @@ import express from 'express';
 const router = express.Router();
 
 // Controllers
-const { 
+import { 
     submitFeedback, 
     getAllFeedbacks, 
     getOneFeedback, 
     updateFeedback, 
     deleteFeedback,
     getFeedbackByCategory
-} = require('../controllers/feedbackController');
+} from '../controllers/feedbackController.js';
+
 
 // Routes
 router.post('/submit', submitFeedback);
@@ -19,4 +20,5 @@ router.put('/:id', updateFeedback);
 router.delete('/:id', deleteFeedback);
 router.get('/category/:category', getFeedbackByCategory);
 
-module.exports = router;
+export default router;
+
