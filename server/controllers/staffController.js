@@ -72,7 +72,7 @@ export const staffSignup = async (req, res) => {
         if (existingStaff) {
             return res.status(400).json({ error: 'email already exists' });
         }
-        const newStaff = await Staff.create({ email, password });
+        const newStaff = await Staff.create(req.body);
         res.status(201).json(newStaff);
     } catch (error) {
         res.status(500).json({ error: error.message });

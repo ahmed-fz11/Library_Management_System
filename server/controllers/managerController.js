@@ -73,7 +73,7 @@ export const managerSignup = async (req, res) => {
         if (existingManager) {
             return res.status(400).json({ error: 'email already exists' });
         }
-        const newManager = await Manager.create({ email, password });
+        const newManager = await Manager.create(req.body);
         res.status(201).json(newManager);
     } catch (error) {
         res.status(500).json({ error: error.message });

@@ -68,12 +68,14 @@ export const deleteStudent = async (req, res) => {
 // Student Signup
 export const studentSignup = async (req, res) => {
     try {
+        // console.log("In signup student")
+        // console.log(req.body)
         const { email, password } = req.body;
         const existingStudent = await Student.findOne({ email });
         if (existingStudent) {
             return res.status(400).json({ error: 'email already exists' });
         }
-        const newStudent = await Student.create({ email, password });
+        const newStudent = await Student.create( req.body );
         res.status(201).json(newStudent);
     } catch (error) {
         res.status(500).json({ error: error.message });
