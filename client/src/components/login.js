@@ -67,6 +67,9 @@ const Login = (props) => {
       setLoginError(error.response?.data?.error || 'Login failed');
     });
   };
+  const handleSignUpRedirect = () => {
+    navigate('/signup');
+  }
 
   return (
     <MDBContainer fluid className='d-flex align-items-center justify-content-center bg-image' style={{backgroundImage: 'url(https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp)'}}>
@@ -93,6 +96,9 @@ const Login = (props) => {
                 <ErrorMessage name="password" component="div" className="text-danger" />
 
                 <MDBBtn type='submit' className='mb-4 w-100 gradient-custom-4' size='lg'>Login</MDBBtn>
+                <p className="text-center">
+                  Don't have an account? <span className="text-primary" style={{ cursor: 'pointer' }} onClick={handleSignUpRedirect}>Sign up</span>
+                </p>
               </Form>
             )}
           </Formik>
