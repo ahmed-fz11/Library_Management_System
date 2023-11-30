@@ -6,7 +6,9 @@ import Feedback from '../models/feedback.js';
 // Submit feedback
 export const submitFeedback = async (req, res) => {
     try {
+        console.log("Feedback: ",req.body)
         const feedback = await Feedback.create(req.body);
+        console.log("Feedback successfully created in database")
         res.status(201).json(feedback);
     } catch (error) {
         res.status(500).json({ error: error.message });

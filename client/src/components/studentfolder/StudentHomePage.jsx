@@ -63,11 +63,10 @@ const StudentHomePage = ({ userInfo }) => {
           </Navbar>
 
           {/* Respective Section */}
-          {selectedSection === 'feedback' && <Feedback />}
-          {selectedSection === 'books' && <BooksList />}
-          {selectedSection === 'borrowedBooks' && <BorrowedBooks />}
+          {selectedSection === 'feedback' && <Feedback userInfo={userInfo} />}
+          {selectedSection === 'books' && <BooksList userInfo={userInfo} />}
+          {selectedSection === 'borrowedBooks' && <BorrowedBooks userInfo={userInfo}/>}
           {selectedSection === 'updateCredentials' && <UpdateCredentials />}
-          {/* <UpdateCredentials userInfo={userInfo} /> */}
         </div>
       </div>
     </div>
