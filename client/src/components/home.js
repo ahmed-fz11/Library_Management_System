@@ -7,7 +7,7 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const userDetail = localStorage.getItem('user_detail');
+        const userDetail = localStorage.getItem('user_info');
         const userType = localStorage.getItem('user_type');
 
         // Redirect to login if user details are not found in localStorage
