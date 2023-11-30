@@ -42,6 +42,7 @@ export const getOneFeedback = async (req, res) => {
 // Update a feedback
 export const updateFeedback = async (req, res) => {
     try {
+        console.log('Received feedback update request:', req.body);
         const feedbackId = req.body.id;
         const feedback = await Feedback.findByIdAndUpdate(feedbackId, req.body, { new: true });
         if (!feedback) {
