@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
 import { student_update_URL } from '../../constant';
 
-const UpdateCredentials = ({ userInfo }) => {
-  const initialValues = {
-    name: userInfo.name,
-    phoneNo: userInfo.phoneNo,
-    gender: userInfo.gender,
-    email: userInfo.email,
-    password: '',
-  };
+const UpdateCredentials = () => {
+  const [userInfo, setUserInfo] = useState(null);
+
+  useEffect(() => {
+    const userDetail = localStorage.getItem('user_info');
+    if (userDetail) {
+      setUserInfo(JSON.parse(userDetail));
+    }
+  }, []);
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Required'),
@@ -23,15 +24,44 @@ const UpdateCredentials = ({ userInfo }) => {
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
+    // Construct the payload
+    const payload = {
+      ...values,
+      id: userInfo._id // Ensure the _id is sent for identification
+    };
+
+    // // Avoid sending an empty password field
+    // if (!payload.password) {
+    //   delete payload.password;
+    // }
+
     try {
-      // Make API call to update student credentials
-      const response = await axios.post(student_update_URL, { id: userInfo.id, ...values });
+      const response = await axios.post(student_update_URL, payload);
       console.log('Credentials updated:', response.data);
+      
+      localStorage.setItem('user_info', JSON.stringify(response.data));
+      
+      window.location.reload();
     } catch (error) {
-      console.error('Error updating credentials:', error);
+      console.error('Error updating credentials:', error.response?.data?.error || error.message);
+      setSignupError(error.response?.data?.error || 'Could not update credentials.');
     } finally {
       setSubmitting(false);
     }
+  };
+
+  // If userInfo is not yet set, show a loading state
+  if (!userInfo) {
+    return <div>Loading...</div>;
+  }
+
+  // Initial values for Formik, using userInfo
+  const initialValues = {
+    name: userInfo?.name || '',
+    phoneNo: userInfo?.phoneNo || '',
+    gender: userInfo?.gender || '',
+    email: userInfo?.email || '',
+    password: userInfo?.email, // Keep password field empty for security
   };
 
   return (

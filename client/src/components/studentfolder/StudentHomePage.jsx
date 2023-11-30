@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import StudentInfo from './StudentInfo';
 import Feedback from './Feedback';
 import BooksList from './BooksList';
@@ -8,7 +8,9 @@ import { Navbar, Nav } from 'react-bootstrap';
 
 const StudentHomePage = ({ userInfo }) => {
   const [selectedSection, setSelectedSection] = useState('feedback');
-
+  useEffect(() => {
+    console.log('userInfo in Student Home Page:', userInfo);
+  }, []);
   return (
     <div className="container mt-4">
       <div className="row">
@@ -64,7 +66,8 @@ const StudentHomePage = ({ userInfo }) => {
           {selectedSection === 'feedback' && <Feedback />}
           {selectedSection === 'books' && <BooksList />}
           {selectedSection === 'borrowedBooks' && <BorrowedBooks />}
-          {selectedSection === 'updateCredentials' && <UpdateCredentials userInfo={userInfo} />}
+          {selectedSection === 'updateCredentials' && <UpdateCredentials />}
+          {/* <UpdateCredentials userInfo={userInfo} /> */}
         </div>
       </div>
     </div>
