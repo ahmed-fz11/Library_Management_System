@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
+import { book_all_URL } from '../../constant';
 
 const BooksList = () => {
   const [books, setBooks] = useState([]);
@@ -10,7 +11,7 @@ const BooksList = () => {
     // Fetch list of books from the backend
     const fetchBooks = async () => {
       try {
-        const response = await axios.get('/api/book/all'); //API endpoint
+        const response = await axios.post(book_all_URL); //API endpoint
         setBooks(response.data);
       } catch (error) {
         console.error('Error fetching books:', error);

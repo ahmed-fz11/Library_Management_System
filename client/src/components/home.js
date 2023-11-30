@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import StudentHomePage from './studentfolder/StudentHomePage';
 
 const Home = () => {
     const [userInfo, setUserInfo] = useState(null);
@@ -28,15 +29,8 @@ const Home = () => {
 
     return (
         <div>
-            <h1>Welcome to Home Page</h1>
-            {userInfo && (
-                <div>
-                    <h2>User Information:</h2>
-                    <p>Name: {userInfo.name}</p>
-                    <p>Email: {userInfo.email}</p>
-                    <p>User Type: {userType}</p>
-                </div>
-            )}
+            {/* {userInfo?.name} */}
+            <StudentHomePage userInfo={userInfo}></StudentHomePage>
         </div>
     );
 };
