@@ -2,24 +2,58 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import { book_all_URL } from '../../constant';
+import { book_all_URL, book_update_URL, borrowedbooks_add_URL } from '../../constant';
 
-const BooksList = () => {
+const BooksList = ({ userInfo }) => {
   const [books, setBooks] = useState([]);
-
+  const fetchBooks = async () => {
+    try {
+      const response = await axios.post(book_all_URL); // Assuming GET request for fetching all books
+      setBooks(response.data);
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    }
+  };
   useEffect(() => {
-    // Fetch list of books from the backend
-    const fetchBooks = async () => {
-      try {
-        const response = await axios.post(book_all_URL); //API endpoint
-        setBooks(response.data);
-      } catch (error) {
-        console.error('Error fetching books:', error);
-      }
-    };
+    
 
     fetchBooks();
-  }, []); // Empty dependency array ensures the effect runs once on component mount
+  }, []);
+
+  const handleBorrowBook = async (bookId) => {
+    try {
+      // Set issueDate to today and dueDate to 2 days from today
+      const issueDate = new Date();
+      const dueDate = new Date();
+      dueDate.setDate(dueDate.getDate() + 2); // Adding 2 days for the due date
+  
+      // Format dates to ISO string (YYYY-MM-DD)
+      const formattedIssueDate = issueDate.toISOString().split('T')[0];
+      const formattedDueDate = dueDate.toISOString().split('T')[0];
+  
+      // Update book to set it as not available
+      await axios.post(book_update_URL, {
+        id: bookId,
+        available: false,
+      });
+  
+      // Create a new borrowed book record
+      const newBorrowedBook = {
+        student: userInfo._id,
+        book: bookId,
+        issueDate: formattedIssueDate,
+        dueDate: formattedDueDate,
+        status: 'issued', // Assuming default status is 'issued'
+      };
+      await axios.post(borrowedbooks_add_URL, newBorrowedBook);
+  
+      // Fetch updated list of books to refresh the UI
+      await fetchBooks();
+    } catch (error) {
+      console.error('Error borrowing the book:', error);
+    }
+  };
+  
 
   return (
     <div className="container mt-4">
@@ -33,7 +67,7 @@ const BooksList = () => {
                 <Card.Subtitle className="mb-2 text-muted">{book.author}</Card.Subtitle>
                 <Card.Text>Availability: {book.available ? 'Available' : 'Not Available'}</Card.Text>
                 {book.available && (
-                  <Button variant="primary">Borrow</Button>
+                  <Button variant="primary" onClick={() => handleBorrowBook(book._id)}>Borrow</Button>
                 )}
               </Card.Body>
             </Card>
