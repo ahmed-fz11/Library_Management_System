@@ -3,7 +3,7 @@ import axios from 'axios';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
-const BookList = () => {
+const BooksList = () => {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const BookList = () => {
   );
 };
 
-export default BookList;
+export default BooksList;
