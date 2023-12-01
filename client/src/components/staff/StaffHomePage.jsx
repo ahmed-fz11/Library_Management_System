@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import StaffInfo from './StaffInfo';
-import BooksList from '../studentfolder/BooksList';
+import StaffBooksList from './StaffBooksList';
 import Feedbacks from './Feedbacks';
 import UpdateCredentials from './UpdateCredentials';
 import BorrowedBooks from '../studentfolder/BorrowedBooks';
@@ -73,7 +73,7 @@ const StaffHomePage = ({ userInfo }) => {
 
           {/* Respective Section */}
           {selectedSection === 'feedbacks' && <Feedbacks userInfo={userInfo} />}
-          {selectedSection === 'books' && <BooksList userInfo={userInfo} />}
+          {selectedSection === 'books' && <StaffBooksList userInfo={userInfo} />}
           {selectedSection === 'updateCredentials' && <UpdateCredentials />}
           {selectedSection === 'BorrowedBooks' && <BorrowedBooks userInfo={userInfo}/>}
           {selectedSection === 'CreateBook' && <CreateBook />}
