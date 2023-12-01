@@ -1,6 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const StaffInfo = ({ userInfo }) => {
+  const navigate = useNavigate();
+  const handleSignOut = () => {
+    localStorage.removeItem('user_info');
+    localStorage.removeItem('user_type');
+    navigate('/login'); 
+  };
   return (
     <div className="card">
       <div className="card-body">
@@ -25,6 +32,9 @@ const StaffInfo = ({ userInfo }) => {
             <strong>Salary: </strong> {userInfo?.salary}
           </li>
         </ul>
+        <button onClick={handleSignOut} className="btn btn-danger mt-3">
+          Sign Out
+        </button>
       </div>
     </div>
   );
