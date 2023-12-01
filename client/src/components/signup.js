@@ -19,7 +19,7 @@ const SignUp = () => {
       <div className='mask gradient-custom-3'></div>
       <MDBCard className='m-5' style={{maxWidth: '600px'}}>
         <MDBCardBody className='px-5'>
-          <h2 className="text-uppercase text-center mb-5">Create your account</h2>
+          <h2 className="text-uppercase text-center mb-5">Create new account</h2>
           {signupError && <div className="alert alert-danger" role="alert">{signupError}</div>}
           <select className="form-select mb-4" value={role} onChange={(e) => setRole(e.target.value)}>
             <option value="student">Student</option>
