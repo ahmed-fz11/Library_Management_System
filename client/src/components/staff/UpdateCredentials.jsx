@@ -51,14 +51,21 @@ const UpdateCredentials = () => {
     return <div>Loading...</div>;
   }
 
+  const formatSalary = (salary) => {
+    if (salary && salary.$numberDecimal) {
+      return Number(salary.$numberDecimal);
+    }
+    return salary || '';
+  };
+
   const initialValues = {
     name: userInfo?.name || '',
     gender: userInfo?.gender || '',
     location: userInfo?.location || '',
     performance: userInfo?.performance || '',
-    salary: userInfo?.salary || '',
+    salary: formatSalary(userInfo?.salary),
     email: userInfo?.email || '',
-    password: '', // Password field is intentionally left empty for security
+    password: userInfo?.password || ''
   };
 
   return (
