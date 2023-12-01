@@ -3,11 +3,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Button } from 'react-bootstrap';
 import axios from 'axios';
-import { student_update_URL } from '../../constant';
+import { staff_update_URL } from '../../constant';
 
 const UpdateCredentials = () => {
   const [userInfo, setUserInfo] = useState(null);
-  const [SignupError, setSignupError] = useState(null);
+  const [updateError, setUpdateError] = useState(null);
 
   useEffect(() => {
     const userDetail = localStorage.getItem('user_info');
@@ -18,51 +18,47 @@ const UpdateCredentials = () => {
 
   const validationSchema = Yup.object({
     name: Yup.string().required('Required'),
-    phoneNo: Yup.string().required('Required'),
-    gender: Yup.string().required('Required'),
+    gender: Yup.string().required('Required').oneOf(['Male', 'Female', 'Other']),
+    location: Yup.string().required('Required').oneOf(['IT Services', 'Children Section', 'History Section']),
+    performance: Yup.number().required('Required').min(1).max(5),
+    salary: Yup.number().required('Required'),
     email: Yup.string().email('Invalid email address').required('Required'),
     password: Yup.string().min(6, 'Password must be at least 6 characters'),
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
-    // Construct the payload
     const payload = {
       ...values,
-      id: userInfo._id // Ensure the _id is sent for identification
+      id: userInfo._id,
     };
 
-    // // Avoid sending an empty password field
-    // if (!payload.password) {
-    //   delete payload.password;
-    // }
-
     try {
-      const response = await axios.post(student_update_URL, payload);
+      const response = await axios.post(staff_update_URL, payload);
       console.log('Credentials updated:', response.data);
-      
+
       localStorage.setItem('user_info', JSON.stringify(response.data));
-      
+
       window.location.reload();
     } catch (error) {
-      console.error('Error updating credentials:', error.response?.data?.error || error.message);
-      setSignupError(error.response?.data?.error || 'Could not update credentials.');
+    //   console.error('Error updating credentials:', error.response?.data?.error || error.message);
+    //   setUpdateError(error.response?.data?.error || 'Could not update credentials.');
     } finally {
-      setSubmitting(false);
+    //   setSubmitting(false);
     }
   };
 
-  // If userInfo is not yet set, show a loading state
   if (!userInfo) {
     return <div>Loading...</div>;
   }
 
-  // Initial values for Formik, using userInfo
   const initialValues = {
     name: userInfo?.name || '',
-    phoneNo: userInfo?.phoneNo || '',
     gender: userInfo?.gender || '',
+    location: userInfo?.location || '',
+    performance: userInfo?.performance || '',
+    salary: userInfo?.salary || '',
     email: userInfo?.email || '',
-    password: userInfo?.email, // Keep password field empty for security
+    password: '', // Password field is intentionally left empty for security
   };
 
   return (
@@ -83,14 +79,6 @@ const UpdateCredentials = () => {
           </div>
 
           <div className="mb-3">
-            <label htmlFor="phoneNo" className="form-label">
-              Phone Number:
-            </label>
-            <Field type="text" id="phoneNo" name="phoneNo" className="form-control" />
-            <ErrorMessage name="phoneNo" component="div" className="text-danger" />
-          </div>
-
-          <div className="mb-3">
             <label htmlFor="gender" className="form-label">
               Gender:
             </label>
@@ -101,6 +89,35 @@ const UpdateCredentials = () => {
               <option value="Other">Other</option>
             </Field>
             <ErrorMessage name="gender" component="div" className="text-danger" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="location" className="form-label">
+              Location:
+            </label>
+            <Field as="select" id="location" name="location" className="form-control">
+              <option value="">Select Location</option>
+              <option value="IT Services">IT Services</option>
+              <option value="Children Section">Children Section</option>
+              <option value="History Section">History Section</option>
+            </Field>
+            <ErrorMessage name="location" component="div" className="text-danger" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="performance" className="form-label">
+              Performance:
+            </label>
+            <Field type="number" id="performance" name="performance" className="form-control" />
+            <ErrorMessage name="performance" component="div" className="text-danger" />
+          </div>
+
+          <div className="mb-3">
+            <label htmlFor="salary" className="form-label">
+              Salary:
+            </label>
+            <Field type="number" id="salary" name="salary" className="form-control" />
+            <ErrorMessage name="salary" component="div" className="text-danger" />
           </div>
 
           <div className="mb-3">
@@ -122,6 +139,12 @@ const UpdateCredentials = () => {
           <Button type="submit" variant="primary">
             Update Credentials
           </Button>
+
+          {updateError && (
+            <div className="mt-3">
+              <ErrorMessage name="updateError" component="div" className="text-danger" />
+            </div>
+          )}
         </Form>
       </Formik>
     </div>

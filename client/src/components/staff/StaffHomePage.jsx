@@ -1,27 +1,23 @@
 import React, { useEffect, useState } from 'react';
-import StudentInfo from './StudentInfo';
-import Feedback from './Feedback';
-import BooksList from './BooksList';
-import BorrowedBooks from './BorrowedBooks';
-import UpdateCredentials from './UpdateCredentials';
 import { Navbar, Nav } from 'react-bootstrap';
+import StaffInfo from './StaffInfo';
+import BooksList from '../studentfolder/BooksList';
+import Feedbacks from './Feedbacks';
+import UpdateCredentials from './UpdateCredentials';
+import BorrowedBooks from '../studentfolder/BorrowedBooks';
+import CreateBook from './CreateBook';
 
-const StudentHomePage = () => {
-  const [selectedSection, setSelectedSection] = useState('feedback');
-  const [userInfo, setUserInfo] = useState(null);
+const StaffHomePage = ({ userInfo }) => {
+  const [selectedSection, setSelectedSection] = useState('books');
   useEffect(() => {
-    const userDetail = localStorage.getItem('user_info');
-    if (userDetail) {
-      setUserInfo(JSON.parse(userDetail));
-    }
-    console.log('userInfo in Student Home Page:', userInfo);
+    // console.log('userInfo in Staff Home Page:', userInfo);
   }, []);
   return (
     <div className="container mt-4">
       <div className="row">
-        {/* Left Part - Student Info */}
+        {/* Left Part - Staff Info */}
         <div className="col-md-3">
-          <StudentInfo userInfo={userInfo} />
+          <StaffInfo userInfo={userInfo} />
         </div>
 
         {/* Right Part - Navbar and Respective Section */}
@@ -41,6 +37,14 @@ const StudentHomePage = () => {
                 </Nav.Link>
                 <Nav.Link
                   href="#"
+                  active={selectedSection === 'feedbacks'}
+                  onClick={() => setSelectedSection('feedbacks')}
+                  className='mx-4'
+                >
+                  Feedbacks
+                </Nav.Link>
+                <Nav.Link
+                  href="#"
                   active={selectedSection === 'books'}
                   onClick={() => setSelectedSection('books')}
                   className='mx-4'
@@ -49,33 +53,34 @@ const StudentHomePage = () => {
                 </Nav.Link>
                 <Nav.Link
                   href="#"
-                  active={selectedSection === 'feedback'}
-                  onClick={() => setSelectedSection('feedback')}
+                  active={selectedSection === 'BorrowedBooks'}
+                  onClick={() => setSelectedSection('BorrowedBooks')}
                   className='mx-4'
                 >
-                  Feedback
+                  BorrowedBooks
                 </Nav.Link>
                 <Nav.Link
                   href="#"
-                  active={selectedSection === 'borrowedBooks'}
-                  onClick={() => setSelectedSection('borrowedBooks')}
+                  active={selectedSection === 'CreateBook'}
+                  onClick={() => setSelectedSection('CreateBook')}
                   className='mx-4'
                 >
-                  Borrowed Books
+                 CreateBook
                 </Nav.Link>
               </Nav>
             </Navbar.Collapse>
           </Navbar>
 
           {/* Respective Section */}
-          {selectedSection === 'feedback' && <Feedback userInfo={userInfo} />}
+          {selectedSection === 'feedbacks' && <Feedbacks userInfo={userInfo} />}
           {selectedSection === 'books' && <BooksList userInfo={userInfo} />}
-          {selectedSection === 'borrowedBooks' && <BorrowedBooks userInfo={userInfo}/>}
           {selectedSection === 'updateCredentials' && <UpdateCredentials />}
+          {selectedSection === 'BorrowedBooks' && <BorrowedBooks userInfo={userInfo}/>}
+          {selectedSection === 'CreateBook' && <CreateBook />}
         </div>
       </div>
     </div>
   );
 };
 
-export default StudentHomePage;
+export default StaffHomePage;
