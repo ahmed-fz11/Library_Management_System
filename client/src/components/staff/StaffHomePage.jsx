@@ -4,7 +4,7 @@ import StaffInfo from './StaffInfo';
 import StaffBooksList from './StaffBooksList';
 import Feedbacks from './Feedbacks';
 import UpdateCredentials from './UpdateCredentials';
-import BorrowedBooks from '../studentfolder/BorrowedBooks';
+import StaffBorrowedBooks from './StaffBorrowedBooks';
 import CreateBook from './CreateBook';
 
 const StaffHomePage = ({ userInfo }) => {
@@ -75,7 +75,7 @@ const StaffHomePage = ({ userInfo }) => {
           {selectedSection === 'feedbacks' && <Feedbacks userInfo={userInfo} />}
           {selectedSection === 'books' && <StaffBooksList userInfo={userInfo} />}
           {selectedSection === 'updateCredentials' && <UpdateCredentials />}
-          {selectedSection === 'BorrowedBooks' && <BorrowedBooks userInfo={userInfo}/>}
+          {selectedSection === 'BorrowedBooks' && <StaffBorrowedBooks userInfo={userInfo}/>}
           {selectedSection === 'CreateBook' && <CreateBook />}
         </div>
       </div>
