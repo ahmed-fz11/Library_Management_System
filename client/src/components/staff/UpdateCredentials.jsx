@@ -111,21 +111,21 @@ const UpdateCredentials = () => {
             <ErrorMessage name="location" component="div" className="text-danger" />
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="performance" className="form-label">
               Performance:
             </label>
             <Field type="number" id="performance" name="performance" className="form-control" />
             <ErrorMessage name="performance" component="div" className="text-danger" />
-          </div>
+          </div> */}
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="salary" className="form-label">
               Salary:
             </label>
             <Field type="number" id="salary" name="salary" className="form-control" />
             <ErrorMessage name="salary" component="div" className="text-danger" />
-          </div>
+          </div> */}
 
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
