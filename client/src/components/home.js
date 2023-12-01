@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import StudentHomePage from "./studentfolder/StudentHomePage";
 import StaffHomePage from "./staff/StaffHomePage";
+import ManagerHomePage from "./manager/ManagerHomePage";
 
 const Home = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -68,6 +69,7 @@ console.log("salaryAsInt",salaryAsInt)
     <div>
       {userType === "student" && <StudentHomePage userInfo={userInfo} />}
       {userType === "staff" ? <StaffHomePage userInfo={userInfo} /> : true}
+      {userType === "manager" ? <ManagerHomePage userInfo={userInfo} /> : true}
     </div>
   );
 };
