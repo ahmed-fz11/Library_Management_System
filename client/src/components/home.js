@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import StudentHomePage from "./student/StudentHomePage";
 import StaffHomePage from "./staff/StaffHomePage";
 import ManagerHomePage from "./manager/ManagerHomePage";
+import backgroundImage from "../styles/library_pic.jpg"
 
 const Home = () => {
   const [userInfo, setUserInfo] = useState(null);
@@ -70,7 +71,17 @@ console.log("salaryAsInt",salaryAsInt)
   }, [userType]);
 
   return (
-    <div>
+    <div style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        height: "100vh", // Adjust the height as needed
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        // Add more styles as needed
+      }}>
       {userType === "student" && <StudentHomePage />}
       {userType === "staff" ? <StaffHomePage userInfo={userInfo} /> : true}
       {userType === "manager" ? <ManagerHomePage /> : true}
