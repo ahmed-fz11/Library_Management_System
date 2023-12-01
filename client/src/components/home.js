@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import StudentHomePage from "./studentfolder/StudentHomePage";
+import StudentHomePage from "./student/StudentHomePage";
 import StaffHomePage from "./staff/StaffHomePage";
 import ManagerHomePage from "./manager/ManagerHomePage";
 
@@ -20,6 +20,10 @@ const Home = () => {
       navigate("/login");
       return;
     }
+    if (a === "manager") {
+        setUserType("manager");
+        return;
+      }
     if (a === "student") {
         setUserType("student");
         return;
@@ -67,9 +71,9 @@ console.log("salaryAsInt",salaryAsInt)
 
   return (
     <div>
-      {userType === "student" && <StudentHomePage userInfo={userInfo} />}
+      {userType === "student" && <StudentHomePage />}
       {userType === "staff" ? <StaffHomePage userInfo={userInfo} /> : true}
-      {userType === "manager" ? <ManagerHomePage userInfo={userInfo} /> : true}
+      {userType === "manager" ? <ManagerHomePage /> : true}
     </div>
   );
 };

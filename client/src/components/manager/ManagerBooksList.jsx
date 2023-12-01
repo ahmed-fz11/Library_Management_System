@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import FormControl from 'react-bootstrap/FormControl';
 import { book_all_URL} from '../../constant';
 
-const StaffBooksList = ({ userInfo }) => {
+const ManagerBooksList = ({ userInfo }) => {
   const [books, setBooks] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -59,4 +59,4 @@ const StaffBooksList = ({ userInfo }) => {
   );
 };
 
-export default StaffBooksList;
+export default ManagerBooksList;

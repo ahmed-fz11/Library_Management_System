@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Navbar, Nav } from 'react-bootstrap';
 import ManagerInfo from './ManagerInfo';
-import BorrowedBooks from '../studentfolder/BorrowedBooks';
+import ManagerBorrowedBooks from './ManagerBorrowedBooks';
 import UpdateCredentials from './UpdateCredentials';
 import RateStaff from './RateStaff';
+import ManagerBooksList from './ManagerBooksList';
+import ManagerFeedbacks from './ManagerFeedbacks';
 
 const ManagerHomePage = () => {
   const [selectedSection, setSelectedSection] = useState('feedback');
@@ -13,7 +15,7 @@ const ManagerHomePage = () => {
     if (userDetail) {
       setUserInfo(JSON.parse(userDetail));
     }
-    console.log('userInfo in Student Home Page:', userInfo);
+    console.log('userInfo in Manager Home Page:', userInfo);
   }, []);
   return (
     <div className="container mt-4">
@@ -48,6 +50,22 @@ const ManagerHomePage = () => {
                 </Nav.Link>
                 <Nav.Link
                   href="#"
+                  active={selectedSection === 'managerFeedbacks'}
+                  onClick={() => setSelectedSection('managerFeedbacks')}
+                  className='mx-4'
+                >
+                  Feedbacks
+                </Nav.Link>
+                <Nav.Link
+                  href="#"
+                  active={selectedSection === 'managerBooksList'}
+                  onClick={() => setSelectedSection('managerBooksList')}
+                  className='mx-4'
+                >
+                  Books
+                </Nav.Link>
+                <Nav.Link
+                  href="#"
                   active={selectedSection === 'borrowedBooks'}
                   onClick={() => setSelectedSection('borrowedBooks')}
                   className='mx-4'
@@ -60,8 +78,10 @@ const ManagerHomePage = () => {
 
           {/* Respective Section */}
           {selectedSection === 'RateStaff' && <RateStaff userInfo={userInfo} />}
-          {selectedSection === 'borrowedBooks' && <BorrowedBooks userInfo={userInfo}/>}
+          {selectedSection === 'borrowedBooks' && <ManagerBorrowedBooks userInfo={userInfo}/>}
           {selectedSection === 'updateCredentials' && <UpdateCredentials />}
+          {selectedSection === 'managerBooksList' && <ManagerBooksList />}
+          {selectedSection === 'managerFeedbacks' && <ManagerFeedbacks />}
         </div>
       </div>
     </div>
