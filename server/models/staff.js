@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 const staffSchema = new mongoose.Schema({
     name: { type: String, required: true },
@@ -17,6 +18,29 @@ const staffSchema = new mongoose.Schema({
         required: true
     }
 });
+
+staffSchema.pre('save', async function (next) {
+    const staff = this;
+    if (!staff.isModified('password')) return next();
+
+    const saltRounds = 10;
+    try {
+        const hashedPassword = await bcrypt.hash(staff.password, saltRounds);
+        staff.password = hashedPassword;
+        next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
+//Method to compare passwords
+staffSchema.methods.isPasswordValid = async function (password) {
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {
+        throw error;
+    }
+};
 
 const Staff = mongoose.model('Staff', staffSchema);
 

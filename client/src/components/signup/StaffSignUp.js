@@ -13,7 +13,13 @@ const StaffSignUpSchema = Yup.object().shape({
   performance: Yup.number().min(1).max(5).required('Performance is required'),
   salary: Yup.number().typeError('Salary must be a number').required('Salary is required'),
   email: Yup.string().email('Invalid email format').required('Email is required'),
-  password: Yup.string().required('Password is required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters long')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+      'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number'
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Confirm password is required'),

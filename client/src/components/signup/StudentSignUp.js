@@ -11,7 +11,13 @@ const StudentSignUpSchema = Yup.object().shape({
   phoneNo: Yup.string().required('Phone number is required'),
   gender: Yup.string().required('Gender is required'),
   email: Yup.string().email('Invalid email format').required('Required'),
-  password: Yup.string().required('Required'),
+  password: Yup.string()
+    .required('Password is required')
+    .min(8, 'Password must be at least 8 characters long')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/,
+      'Password must contain at least 1 uppercase letter, 1 lowercase letter, and 1 number'
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Passwords must match')
     .required('Required'),

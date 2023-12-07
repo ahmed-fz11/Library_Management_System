@@ -21,7 +21,7 @@ const UpdateCredentials = () => {
     phoneNo: Yup.string().required('Required'),
     gender: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters'),
+    // password: Yup.string().min(6, 'Password must be at least 6 characters'),
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
@@ -62,7 +62,7 @@ const UpdateCredentials = () => {
     phoneNo: userInfo?.phoneNo || '',
     gender: userInfo?.gender || '',
     email: userInfo?.email || '',
-    password: userInfo?.email, // Keep password field empty for security
+    // password: userInfo?.email, // Keep password field empty for security
   };
 
   return (
@@ -111,13 +111,13 @@ const UpdateCredentials = () => {
             <ErrorMessage name="email" component="div" className="text-danger" />
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="password" className="form-label">
               New Password:
             </label>
             <Field type="password" id="password" name="password" className="form-control" />
             <ErrorMessage name="password" component="div" className="text-danger" />
-          </div>
+          </div> */}
 
           <Button type="submit" variant="primary">
             Update Credentials

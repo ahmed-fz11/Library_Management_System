@@ -92,9 +92,11 @@ export const studentLogin = async (req, res) => {
         if (!student) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
-        if (student.password !== password) {
+        const isPasswordValid = await student.isPasswordValid(password)
+        if(!isPasswordValid){
             return res.status(401).json({ error: 'Invalid email or password' });
         }
+
         res.status(200).json(student);
     } catch (error) {
         res.status(500).json({ error: error.message });

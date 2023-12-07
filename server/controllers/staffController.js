@@ -87,7 +87,8 @@ export const staffLogin = async (req, res) => {
         if (!staff) {
             return res.status(401).json({ error: 'Invalid email or password' });
         }
-        if (staff.password !== password) {
+        const isPasswordValid = await staff.isPasswordValid(password)
+        if(!isPasswordValid){
             return res.status(401).json({ error: 'Invalid email or password' });
         }
         res.status(200).json(staff);

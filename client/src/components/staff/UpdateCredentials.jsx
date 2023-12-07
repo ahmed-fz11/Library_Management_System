@@ -23,7 +23,7 @@ const UpdateCredentials = () => {
     performance: Yup.number().required('Required').min(1).max(5),
     salary: Yup.number().required('Required'),
     email: Yup.string().email('Invalid email address').required('Required'),
-    password: Yup.string().min(6, 'Password must be at least 6 characters'),
+    // password: Yup.string().min(6, 'Password must be at least 6 characters'),
   });
 
   const handleSubmit = async (values, { setSubmitting }) => {
@@ -65,7 +65,7 @@ const UpdateCredentials = () => {
     performance: userInfo?.performance || '',
     salary: formatSalary(userInfo?.salary),
     email: userInfo?.email || '',
-    password: userInfo?.password || ''
+    // password: userInfo?.password || ''
   };
 
   return (
@@ -135,13 +135,13 @@ const UpdateCredentials = () => {
             <ErrorMessage name="email" component="div" className="text-danger" />
           </div>
 
-          <div className="mb-3">
+          {/* <div className="mb-3">
             <label htmlFor="password" className="form-label">
               New Password:
             </label>
             <Field type="password" id="password" name="password" className="form-control" />
             <ErrorMessage name="password" component="div" className="text-danger" />
-          </div>
+          </div> */}
 
           <Button type="submit" variant="primary">
             Update Credentials
